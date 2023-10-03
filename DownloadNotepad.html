@@ -1,0 +1,98 @@
+  <!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body{
+            background: rgb(128, 145, 163);
+        }
+        #window{
+            width: 500px;
+            background: #d9d9d9;
+            margin: 0 auto;
+            margin-top: 2%;
+            border-radius: 3px;
+            padding: 12px 0;
+            font-family: Verdana, sans-serif;
+            color: #333;
+            cursor: default;
+            box-shadow: 0 0 16px -2px #32323280;
+        }
+        #buttons{
+            float: right;
+            margin-right: 12px;
+        }
+        #buttons a{
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background .3s;
+            -webkit-transition: background .3s;
+        }
+        #minimize{background: #3c6;}
+        #resize{background: #cc3;}
+        #close{background: #c33;}
+        #minimize:hover{background: #1a4;}
+        #resize:hover{background: #aa1;}
+        #close:hover{background: #a11;}
+        #title{
+            margin-left: 12px;
+            font-size: 90%;
+        }
+        textarea{
+            width: 96%;
+            max-width: 96%;
+            min-height: 220px;
+            background: #efefef;
+            margin-top: 10px;
+            border: 0;
+            padding: 2%;
+            font-family: Verdana, sans-serif;
+            font-size: 95%;
+            line-height: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div id="window">
+        <div id="buttons">
+            <a href="#" id="minimize"></a>
+            <a href="#" id="resize"></a>
+            <a href="#" id="close"></a>
+        </div>
+        <div id="title">Notepad</div>
+        <textarea id="textarea"></textarea>
+        
+    
+        <button id="downloadButton">Download</button>
+    </div>
+
+    <script>
+        
+        const textarea = document.getElementById('textarea');
+        const downloadButton = document.getElementById('downloadButton');
+
+        
+        downloadButton.addEventListener('click', () => {
+            
+            const textToDownload = textarea.value;
+
+            
+            const blob = new Blob([textToDownload], { type: 'text/plain' });
+
+            
+            const url = URL.createObjectURL(blob);
+
+    
+            const a = document.createElement('a');
+
+            a.href = url;
+
+            a.download = 'notes.txt'; 
+
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+    </script>
+</body>
+</html>
